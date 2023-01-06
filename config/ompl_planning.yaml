@@ -128,6 +128,9 @@ planner_configs:
     dense_delta_fraction: 0.001  # delta fraction for interface detection. default: 0.001
     max_failures: 5000  # maximum consecutive failure limit. default: 5000
 $(arg arm_id)_arm: &arm_config
+  enforce_constrained_planning_state_space: true
+  projection_evaluator: joints($(arg arm_id)_joint1,$(arg arm_id)_joint2)
+  longest_valid_segment_fraction: 0.005
   planner_configs:
     - AnytimePathShortening
     - SBL
@@ -153,8 +156,6 @@ $(arg arm_id)_arm: &arm_config
     - LazyPRMstar
     - SPARS
     - SPARStwo
-  projection_evaluator: joints($(arg arm_id)_joint1,$(arg arm_id)_joint2)
-  longest_valid_segment_fraction: 0.005
 $(arg arm_id)_manipulator: *arm_config
 $(arg arm_id)_hand:
   planner_configs:
