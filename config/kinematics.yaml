@@ -1,6 +1,25 @@
-$(arg arm_id)_arm: &arm_config
-  kinematics_solver: kdl_kinematics_plugin/KDLKinematicsPlugin
-  kinematics_solver_search_resolution: 0.005
-  kinematics_solver_timeout: 0.05
+# $(arg arm_id)_arm: &arm_config
+#   kinematics_solver: kdl_kinematics_plugin/KDLKinematicsPlugin
+#   kinematics_solver_search_resolution: 0.005
+#   kinematics_solver_timeout: 0.005
+#   kinematics_solver_attempts: 20
 
-$(arg arm_id)_manipulator: *arm_config
+# $(arg arm_id)_manipulator: *arm_config
+
+fr3_arm:
+    kinematics_solver: bio_ik/BioIKKinematicsPlugin
+    kinematics_solver_search_resolution: 0.005
+    kinematics_solver_timeout: 0.005
+
+    ## Those params exist for pick_ik
+    # mode: global
+    stop_optimization_on_valid_solution: true
+    position_scale: 1.0
+    rotation_scale: 0.5
+    position_threashold: 0.001
+    orientation_threashold: 0.01
+    cost_threashold: 0.001
+    minimal_displacement_weight: 0.0
+    # gd_step_size: 0.001
+
+    mode: gd_c # use the gradient descent solver

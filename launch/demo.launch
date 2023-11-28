@@ -1,4 +1,7 @@
 <launch>
+
+  <!-- we call this panda_moveit_config not the one in moveit_ressources -->
+
   <arg name="arm_id" default="panda" />
 
   <!-- specify the planning pipeline -->
